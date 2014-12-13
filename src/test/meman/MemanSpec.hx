@@ -24,28 +24,28 @@ class MemanSpec extends BuddySuite {
             });
 
             it("assigns a new ID on add to an object without one", function() {
-                managedObj.getObjectId().should.be(0);
+                managedObj.get_objectId().should.be(0);
                 meman.add(managedObj);
-                managedObj.getObjectId().should.beGreaterThan(0);
+                managedObj.get_objectId().should.beGreaterThan(0);
             });
 
             it("increments the object reference count when added", function() {
-                managedObj.getRefCount().should.be(0);
+                managedObj.get_refCount().should.be(0);
                 meman.add(managedObj);
-                managedObj.getRefCount().should.be(1);
+                managedObj.get_refCount().should.be(1);
                 meman.add(managedObj);
-                managedObj.getRefCount().should.be(2);
+                managedObj.get_refCount().should.be(2);
             });
 
             it("decrements the object reference count when removed", function() {
                 meman.add(managedObj);
                 meman.add(managedObj);
-                managedObj.getRefCount().should.be(2);
+                managedObj.get_refCount().should.be(2);
             });
 
             it("returns the object instance from an ID", function() {
                 meman.add(managedObj);
-                var id = managedObj.getObjectId();
+                var id = managedObj.get_objectId();
                 var ref = meman.get(id);
                 ref.should.be(managedObj);
             });
@@ -53,11 +53,11 @@ class MemanSpec extends BuddySuite {
             it("returns null when no references are remaining", function() {
                 meman.add(managedObj);
                 meman.add(managedObj);
-                managedObj.getRefCount().should.be(2);
+                managedObj.get_refCount().should.be(2);
                 meman.remove(managedObj);
-                managedObj.getRefCount().should.be(1);
+                managedObj.get_refCount().should.be(1);
                 meman.remove(managedObj);
-                meman.get(managedObj.getObjectId()).should.be(null);
+                meman.get(managedObj.get_objectId()).should.be(null);
             });
         });
     }

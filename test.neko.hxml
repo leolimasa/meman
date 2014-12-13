@@ -5,6 +5,6 @@
 -lib mockatoo
 -lib mcover
 --macro mcover.MCover.coverage(['meman'],['src/main'])
--neko out/neko/test.n
+-neko out/test.n
 -D coverage
--cmd "neko out/neko/test.n"
+-cmd "neko out/test.n"
