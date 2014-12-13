@@ -1,0 +1,10 @@
+-cp src/test
+-cp src/main
+-main meman.TestMain
+-lib buddy
+-lib mockatoo
+-lib mcover
+--macro mcover.MCover.coverage(['meman'],['src/main'])
+-neko out/neko/test.n
+-D coverage
+-cmd "neko out/neko/test.n"

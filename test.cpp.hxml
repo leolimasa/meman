@@ -1,0 +1,7 @@
+-cp test
+-cp src
+-main ConceptualTest
+-lib buddy
+-lib mockatoo
+-cpp out/cpp
+-cmd "out/cpp/ConceptualTest"
