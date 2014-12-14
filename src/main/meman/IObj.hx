@@ -1,5 +1,5 @@
 package meman;
-interface IManaged {
+interface IObj {
     function get_objectId() : Int;
     function set_objectId(id : Int) : Int;
     function get_refCount() : Int;

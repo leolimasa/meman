@@ -1,0 +1,12 @@
+{
+    "name": "meman",
+    "url": "https://github.com/submain/meman",
+    "license": "MIT",
+    "tags": ["memory"],
+    "description": "",
+    "version": "0.0.1",
+    "releasenote": "",
+    "contributors": ["leo"],
+    "dependencies": {
+    }
+}

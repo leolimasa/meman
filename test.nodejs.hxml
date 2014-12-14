@@ -1,0 +1,13 @@
+-cp src/test
+-cp src/main
+-main meman.TestMain
+-lib buddy
+-lib mockatoo
+-lib mcover
+-lib nodejs
+--macro mcover.MCover.coverage(['meman'],['src/main'])
+-js out/test.node.js
+-D coverage
+-D nodejs
+-debug
+-cmd "node out/test.node.js"

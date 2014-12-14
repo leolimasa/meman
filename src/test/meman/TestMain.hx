@@ -13,7 +13,8 @@ class TestMain {
 
         var reporter = new ConsoleReporter();
         var runner = new SuitesRunner([
-            new MemanSpec()
+            new MemanSpec(),
+            new ManagedSpec()
         ], reporter);
 
 

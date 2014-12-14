@@ -1,0 +1,7 @@
+-debug
+-cp src/test
+-cp src/main
+-main meman.TestMain
+-lib buddy
+-lib mockatoo
+-js out/test.js

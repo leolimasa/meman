@@ -1,0 +1,11 @@
+-cp src/test
+-cp src/main
+-main meman.TestMain
+-lib buddy
+-lib mockatoo
+-lib mcover
+--macro mcover.MCover.coverage(['meman'],['src/main'])
+-swf out/test.swf
+-D coverage
+-cmd "neko out/test.n"
+-debug

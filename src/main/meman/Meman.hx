@@ -2,22 +2,45 @@ package meman;
 
 class Meman implements IMeman {
 
-    var instances : Array<IManaged>;
+    public static var inst(get, set) : IMeman;
 
-    public function new() {
-        instances = new Array<IManaged>();
+    static var _inst : IMeman;
+
+    public static function set_inst(i:IMeman) : IMeman {
+        _inst = i;
+        return _inst;
     }
 
-    public function add(obj:IManaged):IManaged {
-        obj.set_refCount(obj.get_refCount() + 1);
-        if (obj.get_objectId() == 0) {
-            instances.push(obj);
-            obj.set_objectId(instances.length);
+    public static function get_inst() : IMeman {
+        if (_inst == null) {
+            _inst = new Meman();
         }
+        return _inst;
+    }
+
+    var instances : Array<IObj>;
+
+    public function new() {
+        instances = new Array<IObj>();
+    }
+
+    public function initialize(obj:IObj):IObj {
+        instances.push(null);
+        obj.set_objectId(instances.length);
+        obj.set_refCount(0);
         return obj;
     }
 
-    public function remove(obj:IManaged):IManaged {
+    public function add(obj:IObj):IObj {
+        if (obj.get_refCount() == 0) {
+            instances[obj.get_objectId() - 1] = obj;
+        }
+        obj.set_refCount(obj.get_refCount() + 1);
+
+        return obj;
+    }
+
+    public function remove(obj:IObj):IObj {
         var count = obj.set_refCount(obj.get_refCount() - 1);
         if (count <= 0) {
             instances[obj.get_objectId() - 1] = null;
@@ -25,7 +48,7 @@ class Meman implements IMeman {
         return obj;
     }
 
-    public function get(objectId:Int):IManaged {
+    public function get(objectId:Int):IObj {
         return instances[objectId - 1];
     }
 }

@@ -1,9 +1,10 @@
 package meman;
 
-import meman.IManaged;
+import meman.IObj;
 
 interface IMeman {
-    function add(obj:IManaged) : IManaged;
-    function remove(obj:IManaged) : IManaged;
-    function get(objectId:Int) : IManaged;
+    function add(obj:IObj) : IObj;
+    function remove(obj:IObj) : IObj;
+    function get(objectId:Int) : IObj;
+    function initialize(obj:IObj) : IObj;
 }
