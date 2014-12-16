@@ -1,5 +1,8 @@
 package meman;
 
+/**
+* Main implementation of an object that can be stored with menman.
+**/
 class Obj implements IObj {
 
     public var objectId(get,set):Int;

@@ -4,6 +4,7 @@ package meman;
 import mcover.coverage.MCoverage;
 #end
 
+import superblocks.LibEntrySpec;
 import meman.MemanSpec;
 import buddy.reporting.ConsoleReporter;
 import buddy.SuitesRunner;
@@ -14,7 +15,9 @@ class TestMain {
         var reporter = new ConsoleReporter();
         var runner = new SuitesRunner([
             new MemanSpec(),
-            new ManagedSpec()
+            new ManagedSpec(),
+            new WeakRefSpec(),
+            new LibEntrySpec()
         ], reporter);
 
 

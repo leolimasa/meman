@@ -75,6 +75,10 @@ class MemanSpec extends BuddySuite {
                 meman.initialize(managedObj);
                 managedObj.get_refCount().should.be(0);
             });
+
+            it('recursivelly removes attributes of an object from memory', function() {
+
+            });
         });
     }
 }
