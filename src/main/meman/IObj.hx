@@ -4,4 +4,5 @@ interface IObj {
     function set_objectId(id : Int) : Int;
     function get_refCount() : Int;
     function set_refCount(count : Int) : Int;
+    function collect() : Void;
 }

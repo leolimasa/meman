@@ -1,5 +1,6 @@
 package meman;
 
+import meman.mock.MockObj;
 import buddy.Should;
 import mockatoo.Mockatoo;
 import buddy.BuddySuite;
@@ -13,7 +14,7 @@ class WeakRefSpec extends BuddySuite {
         describe('Weak reference', function() {
             it('is able to store and retrieve an object', function() {
                 var ref = new WeakRef();
-                var obj = new Obj();
+                var obj = new MockObj();
 
                 Meman.inst.add(obj);
 

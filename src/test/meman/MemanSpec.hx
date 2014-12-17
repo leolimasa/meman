@@ -1,5 +1,6 @@
 package meman;
 
+import meman.mock.MockObj;
 import buddy.Should;
 import mockatoo.Mockatoo;
 import meman.IObj;
@@ -19,7 +20,7 @@ class MemanSpec extends BuddySuite {
 
             before(function() {
                 meman = new Meman();
-                managedObj = new Obj(meman);
+                managedObj = new MockObj(meman);
             });
 
             it('assigns a new ID when an object is created', function() {
@@ -76,8 +77,42 @@ class MemanSpec extends BuddySuite {
                 managedObj.get_refCount().should.be(0);
             });
 
-            it('recursivelly removes attributes of an object from memory', function() {
+            it('collects an object when parent refcount reaches 0', function() {
+                var obj1 = new MockObj();
+                var obj2 = new MockObj();
+                var obj3 = new MockObj();
 
+                Meman.inst.add(obj1);
+
+                obj1.child1 = obj2;
+                obj1.child2 = obj3;
+
+                obj2.get_refCount().should.be(1);
+                obj3.get_refCount().should.be(1);
+
+                Meman.inst.remove(obj1);
+
+                obj1.child1.should.be(null);
+                obj2.child2.should.be(null);
+
+                obj1.get_refCount().should.be(0);
+                obj2.get_refCount().should.be(0);
+            });
+
+            it('correctly collects cyclical references', function() {
+                var obj1 = new MockObj();
+                var obj2 = new MockObj();
+
+                Meman.inst.add(obj1);
+
+                obj1.child1 = obj2;
+                obj1.child2 = obj1;
+
+                obj1.get_refCount().should.be(1);
+
+                Meman.inst.remove(obj1);
+
+                obj1.get_refCount().should.be(0);
             });
         });
     }

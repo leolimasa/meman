@@ -37,4 +37,9 @@ class Obj implements IObj {
         _refCount = count;
         return count;
     }
+
+    public function collect() {
+        throw "Collect not implemented.";
+    }
+
 }

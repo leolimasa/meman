@@ -1,5 +1,6 @@
 package superblocks;
 
+import meman.mock.MockObj;
 import meman.Meman;
 import meman.Obj;
 import buddy.Should;
@@ -13,10 +14,10 @@ using buddy.Should;
 class LibEntrySpec extends BuddySuite {
     public function new() {
         describe('Library entry', function() {
-            var entry : LibEntry<Obj>;
+            var entry : LibEntry<MockObj>;
 
             before(function() {
-                entry = new LibEntry<Obj>(Obj);
+                entry = new LibEntry<MockObj>(MockObj);
             });
 
             it('retrieves a typed object', function() {

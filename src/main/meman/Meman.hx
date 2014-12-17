@@ -38,6 +38,7 @@ class Meman implements IMeman {
     * Increments the refcount of the object
     **/
     public function add(obj:IObj):IObj {
+        if (obj == null) return null;
         if (obj.get_refCount() == 0) {
             heap[obj.get_objectId() - 1] = obj;
         }
@@ -50,12 +51,28 @@ class Meman implements IMeman {
     * Decrements the refcount of the object
     **/
     public function remove(obj:IObj):IObj {
+        if (obj == null) {
+            return null;
+        }
         var count = obj.set_refCount(obj.get_refCount() - 1);
         if (count <= 0) {
             heap[obj.get_objectId() - 1] = null;
-            collect(obj);
+            obj.collect();
         }
         return obj;
+    }
+
+    /**
+    * Called when changing the attribute of an object instance
+    **/
+    public function changeAttribute(obj:IObj, oldVal: IObj, newVal: IObj) {
+        if (oldVal != obj) {
+            remove(oldVal);
+        }
+        if (newVal != obj) {
+            add(newVal);
+        }
+        return newVal;
     }
 
     /**
@@ -63,20 +80,5 @@ class Meman implements IMeman {
     **/
     public function get(objectId:Int):IObj {
         return heap[objectId - 1];
-    }
-
-    /**
-    * Goes through the attributes of obj and decrements the ref count
-    * of each in case they are IObj
-    **/
-    public function collect(obj:Dynamic) {
-        var fields = Type.getInstanceFields(obj);
-        for (f in fields) {
-            var value = Reflect.field(obj, f);
-            if (Std.is(value, IObj)) {
-                Reflect.setField(obj, f, null);
-            }
-
-        }
     }
 }
